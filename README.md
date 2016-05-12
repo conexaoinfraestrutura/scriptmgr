@@ -1,0 +1,2 @@
+# scriptmgr
+Um gerenciador escrito totalmente em shell que controla a execução de scripts sequencialmente, através de uma estrutura semelhante a do SySV. Você pode escrever diminutos scripts separados e executá-los na ordem que desejar permitindo realizar diversas atividades sequencialmente e alterar suas ordens como lhe convir sem a necessidade da criação de um script monolitico gigantesco e de complexa leitura, compreensão, e manutenção.
