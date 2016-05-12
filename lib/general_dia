@@ -1,0 +1,43 @@
+#!/bin/bash
+
+# - funcao que constroi as telas de multiplas opcoes
+# - Uso: _funcao "titulo" "opcoes"
+# - retorno da funcao: $RET_RADIOLIST
+function _radiolist_opcoes_multiplas () {
+	clear
+	RADIOLIST_ARRAY_OPCOES=(`echo $2`)
+	RADIOLIST_CMD=(dialog --separate-output --checklist "$1:" 0 0 0)
+	RADIOLIST_OPCOES=(${RADIOLIST_ARRAY_OPCOES[@]})
+	RET_RADIOLIST=$("${RADIOLIST_CMD[@]}" "${RADIOLIST_OPCOES[@]}" 2>&1 >/dev/tty)
+	[ $? -ne 0 ] && exit
+}
+
+# - funcao que constroi as telas de escolhas individuais
+# - Uso _funcao "titulo" "opcoes"
+# - retorno da funcao: $RET_MENU
+function _menu_opcoes_individuais () {
+	clear
+	MENU_ARRAY_OPCOES=(`echo $2`)
+	MENU_CMD=(dialog --menu "$1:" 0 0 0)
+	MENU_OPCOES=(${MENU_ARRAY_OPCOES[@]})
+	RET_MENU=$("${MENU_CMD[@]}" "${MENU_OPCOES[@]}" 2>&1 >/dev/tty)
+	[ $? -ne 0 ] && exit
+}
+
+# - funcao que constroi as telas de mensagem com confirmacao de leitura
+# - Uso _funcao "titulo" "mensagem"
+# - retorno da funcao: $?
+function _caixa_de_mensagem () {
+	clear
+	MSGBOX_CMD=$(dialog --title "$1" --msgbox "$2" --stdout 0 0 2>&1 >/dev/tty)
+}
+
+# - funcao que constroi as telas de entrada de dados simples
+# - Uso _funcao "titulo" "mensagem"
+# - retorno da funcao: $RET_INPUT
+function _caixa_de_entrada () {
+	clear
+	INPUT_CMD=(dialog --inputbox "$1" 0 0 "$2")
+	RET_INPUT=$("${INPUT_CMD[@]}" 2>&1 >/dev/tty)
+	[ $? -ne 0 ] && exit
+}

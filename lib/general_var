@@ -1,0 +1,15 @@
+#!/bin/bash
+# - variaveis especiais para usar no corpo dos scripts
+
+# - data padronizada
+DATA=$(date +%Y%m%d)
+DIA=$(date +%d)
+MES=$(date +%m)
+ANO=$(date +%Y)
+DIA_DA_SEMANA=$(date +%u)
+
+# - informacao de versao
+VERSAO="0 (build 00000000)"
+
+# - instituicao
+INSTIT="guaiba"

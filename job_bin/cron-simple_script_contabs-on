@@ -1,0 +1,4 @@
+#!/bin/bash
+
+cd ${OUTDRI}
+${EXEPATH} "Ola agendamento" > scriptmgr_output.txt 2> ${LOG}

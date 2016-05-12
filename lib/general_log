@@ -1,0 +1,17 @@
+# - criando logs
+if [[ ! -e ${LOG_EXECUCAO} ]]; then touch ${LOG_EXECUCAO}; fi
+if [[ ! -e ${LOG_ERRO} ]]; then touch ${LOG_ERRO}; fi
+
+# - conectando as saidas aos logs do programa
+#exec 1> >(tee -a ${LOG_EXECUCAO})
+#exec 2>> ${LOG_ERRO}
+
+# - logs
+# - uso: funcao/nome_da_rotina
+function _log_execucao () {
+        if [ $? -eq 0 ]; then
+                 logger -t "$(basename $0) [AVISO] " "Rotina --> $1"
+        else
+                 logger -t "$(basename $0) [ERRO] " "Rotina --> $1"
+        fi
+}

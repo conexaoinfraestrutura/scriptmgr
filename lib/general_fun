@@ -1,0 +1,45 @@
+#!/bin/bash
+#set -x
+
+function _carrega_confs () {
+	while read LINHA; do
+		eval export "$LINHA"
+	done < <(grep = ${1} | egrep -v "^#|^$")
+}
+
+function _executa_tarefas () {
+	ARRAY_TAREFAS=("$@")	
+	for SCRIPT in "${ARRAY_TAREFAS[@]}"; do
+        	_carrega_confs ${EM_JOB_CONF}/$(echo ${SCRIPT} | cut -d '-' -f 2).conf
+	        bash ${EM_JOB_BIN}/$(echo ${SCRIPT} | cut -d '-' -f 2)
+	done
+}
+
+function _executa_agendamentos () {
+	for SCRIPT in ${1}; do
+        	_carrega_confs ${EM_JOB_CONF}/$(echo ${SCRIPT} | cut -d '-' -f 2).conf
+	        bash ${EM_JOB_BIN}/${SCRIPT}
+	done
+}
+
+function _comando_remoto () {
+	sshpass -p $1 ssh  -p $4 -q -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no $2@$3 $5
+}
+
+function _rsync_remoto () {
+	SSH_RSYNC_ARGS=("ssh -q -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p $4")
+	sshpass -p $1 rsync -az -e "${SSH_RSYNC_ARGS[@]}" $5 $2@$3:$6
+}
+
+function _cria_links () {
+	# - cria os links com os servicos desabilitados
+	if [[ -z `ls ${EM_RCD}/* 2> /dev/null` ]]; then
+		chmod 755 ${EM_JOB_BIN}/*
+	        INDICE=1
+	        for i in `ls --ignore="cron-*" ${EM_JOB_BIN}`; do
+	                cd ${EM_RCD}
+	                ln -s ../job_bin/${i} ${INDICE}-${i}-off
+	                let INDICE=$INDICE+1
+	        done
+	fi
+}

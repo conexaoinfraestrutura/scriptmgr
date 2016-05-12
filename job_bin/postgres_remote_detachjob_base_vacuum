@@ -1,0 +1,14 @@
+#!/bin/bash
+set -x
+
+# - bibliotecas
+. ${EM_LIB}/general_fun
+
+# - !! IMPORTANTE - tenha o screen instalado no servidor remoto e o ssh funcinando !! - #
+
+# - rodando vacuum analyze na base de dados
+ARRAY_COMANDO_VACUUMDB=("${DBPROD_CMDPGVACUUMDB_REMOTO} -z -p ${BDPROD_DBPORTA_REMOTO} -U ${BDPROD_DBUSUARIO_REMOTO} -d ${BDPROD_DBBASE_REMOTO}")
+
+export IFS=
+# - Executando o comando remotamente no servidor
+_comando_remoto ${BDPROD_SSHSENHA_REMOTO} ${BDPROD_SSHUSUARIO_REMOTO} ${BDPROD_SSHIP_REMOTO} ${BDPROD_SSHPORTA_REMOTO} "screen -S dbontem_restore -d -m bash -c '${ARRAY_COMANDO_VACUUMDB[@]} ; ${ARRAY_COMANDO_VACUUMLO[@]}'"

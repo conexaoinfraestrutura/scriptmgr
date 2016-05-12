@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# - Texto do radiolist dos programas ativos
+TEXT01_INITRD="Selecione os processos que estaram ativos para execucao automatica"
+
+# - Texto do radiolist dos programas executados manualmente
+TEXT01_MANUALTASK="Selecione o processo que voce deseja executar agora !!"
+TEXT02_MANUALTASK="!! ATENCAO !!"
+TEXT03_MANUALTASK="!! Cuidado ao executar processo individuais.!!\nMuitos processo dependem da execucao de outros processos inicialmente.\nAlguns outros podem levar consideravel tempo para executar.\nUtilize estas opcoes com cautela !!"
+TEXT04_MANUALTASK="!! Bem Vindo ao gerenciador de rotinas do scriptmgr !!"
+TEXT05_MANUALTASK="Este e o gerenciador das rotinas do scriptmgr.\nAqui voce pode executar manualmente qualquer script configurado no scriptmgr.\nBasta selecionar no menu seguinte o processo desejado e aguardar sua execucao.\nCaso deseje sair para um terminal do sistema operacional selecione a opcao 'Cancel' no menu seguinte."
+
+# - Texto do trabalhos agendados via crontab
+TEXT01_CRONJOB="Selecione o agendamento que deseja alterar ou desabilitar"
+TEXT02_CRONJOB="!! ATENCAO !!"
+TEXT03_CRONJOB="Para habilitar um agendamento selecione o tempo desejado em minutos.\nCaso deseje desabilita-lo apenas informe o valor em branco"
+TEXT04_CRONJOB="Selecione a frequencia em que sera executado o agendamento:"
+TEXT05_CRONJOB="!! AVISO !!"
+TEXT06_CRONJOB="Desabilitado o agendamento:"
+TEXT07_CRONJOB="!! ATENCAO !!"
+TEXT08_CRONJOB="O valor nao pode ser superior a 60 minutos"
